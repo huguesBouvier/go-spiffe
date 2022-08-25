@@ -47,21 +47,25 @@ func main() {
 		log.Fatalf("Unable to fetch SVID: %v", err)
 	}
 
-	log.Printf("%s", svid)
+	test, err := jwtsvid.ParseAndValidate(svid.Marshal(), jwtSource, []string{"api://AzureADTokenExchange"})
+	if err != nil {
+		log.Fatalf("Validation error: %v", err)
+	}
 
+	log.Printf("%s", test)
 
 	/*
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", svid.Marshal()))
+		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", svid.Marshal()))
 
-	res, err := client.Do(req)
-	if err != nil {
-		log.Fatalf("Unable to connect to %q: %v", serverURL, err)
-	}
-	defer res.Body.Close()
+		res, err := client.Do(req)
+		if err != nil {
+			log.Fatalf("Unable to connect to %q: %v", serverURL, err)
+		}
+		defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Fatalf("Error reading response body: %v", err)
-	}
-	log.Printf("%s", body)*/
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			log.Fatalf("Error reading response body: %v", err)
+		}
+		log.Printf("%s", body)*/
 }
