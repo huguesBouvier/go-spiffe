@@ -17,7 +17,7 @@ import (
 
 const (
 	serverURL  = "https://localhost:8443"
-	socketPath = "unix:///run/azedge/sockets/workloadapi.sock"
+	socketPath = "unix:///run/spire/sockets/agent.sock"
 )
 
 func main() {
